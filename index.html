@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reserva de horas</title>
-    <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-    
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <form id="Formulario" onsubmit="return validarFormulario();">
+      <label for="rut">Rut *</label>
+      <input id="Rut" name="rut" type="text" placeholder="12.345.678-9" autofocus autocapitalize=""/>
+        <p class="mensaje_error" id="RutMensaje"></p>
+
+      <label for="nombres">Nombres *</label>
+      <input id="Nombres" name="nombres" type="text" placeholder="Nombres"/>
+        <p class="mensaje_error" id="NombresMensaje"></p>
+
+      <label for="apellidos">Apellidos *</label>
+      <input id="Apellidos" name="apellidos" type="text" placeholder="Apellidos" />
+        <p class="mensaje_error" id="ApellidosMensaje"></p>
+
+      <label for="edad">Edad *</label>
+      <input id="Edad" name="edad" type="number" placeholder="Edad" min="1"/>
+        <p class="mensaje_error" id="EdadMensaje"></p>
+
+      <label for="email">Email *</label>
+      <input id="Email" name="email" type="email" placeholder="abcd12345@reserva.ya" />
+        <p class="mensaje_error" id="EmailMensaje"></p>
+
+      <label for="especialidad">Especialidad *</label>
+      <select id="Especialidad" name="especialidad"/>
+        <option value="Traumatología">Traumatología</option>
+        <option value="Radiología">Radiología</option>
+        <option value="Dental">Dental</option>
+      </select>
+      <p class="mensaje_error" id="EspecialidadMensaje"></p>
+
+      <label for="fecha">Fecha *</label>
+      <input id="Fecha" name="fecha" type="date" min="2020-07-21" />
+      <p class="mensaje_error" id="FechaMensaje"></p>
+
+      <label for="hora">Hora *</label>
+      <input id="Hora" name="hora" type="time" min="08:00" max="22:00" />
+      <p class="mensaje_error" id="HoraMensaje"></p>
+
+      <input type="submit" value="Reservar" id="Boton">
+    </form>
+
 
     <script src="assets/script.js"></script>
-</body>
+  </body>
 </html>
