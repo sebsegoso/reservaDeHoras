@@ -1,4 +1,6 @@
+
 function validarFormulario() {
+    //Extrayendo valores desde el HTML
     let rut = document.getElementById("Rut").value;
     let nombres = document.getElementById("Nombres").value;
     let apellidos = document.getElementById("Apellidos").value;
@@ -7,18 +9,69 @@ function validarFormulario() {
     let especialidad = document.getElementById("Especialidad").value;
     let fecha = document.getElementById("Fecha").value;
     let hora = document.getElementById("Hora").value;
+    //Espresiones regulares
+    const rutChilenoRegExp = /^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}$/gim;
+    const soloLetrasRegExp = /^[A-Za-z\ ÁÉÍÓÚáéíóúÑñ'-\s]*$/;
+    const emailRegExp = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    const edadRegExp = /^[0-9]{1,3}$/;
+    //validaciones de expresiones regulares
+    const validarRut = rutChilenoRegExp.test(rut);
+    const validarNombres = soloLetrasRegExp.test(nombres);
+    const validarApellidos = soloLetrasRegExp.test(apellidos);
+    const validarEdad = edadRegExp.test(edad);
+    const validarEmail = emailRegExp.test(email);
 
+    console.log(fecha);
+    console.log(hora);
+    //Todos los campos están rellenados
     if (
         rut === "" ||
-        nombres === "" ||
-        apellidos === "" ||
-        edad === "" ||
-        email === "" ||
-        especialidad === "" ||
-        fecha === "" ||
-        hora === ""
+            nombres === "" ||
+            apellidos === "" ||
+            edad === "" ||
+            email === "" ||
+            especialidad === "" ||
+            fecha === "" ||
+            hora === ""
     ) {
-        alert("Para hacer efectiva la reserva de tu hora debes llenar todos los campos solicitados");
-        return false
+        alert(
+            "Para hacer efectiva la reserva de tu hora debes completar todos los campos solicitados"
+        );
+        return false;
+    } 
+    //Rut con formato correcto
+    else if (!validarRut) {
+        document.getElementById("RutMensaje").innerHTML =  "El formato del rut no es correcto, debe incluir puntos y guión";
+        return false;
     }
-}
+    //Nombres con formato correcto
+    else if (!validarNombres) {
+        document.getElementById("NombresMensaje").innerHTML =  "Los nombres sólo deben llevar letras";
+        return false;
+    }
+    //Apellidos 
+    else if (!validarApellidos) {
+        document.getElementById("ApellidosMensaje").innerHTML =  "Los apellidos sólo deben llevar letras";
+        return false;
+    }
+    //Edad
+    else if (!validarEdad) {
+        document.getElementById("EdadMensaje").innerHTML =  "La edad ingresada no es válida, sólo números";
+        return false;
+    }
+    //email
+    else if (!validarEmail) {
+        document.getElementById("EmailMensaje").innerHTML =  "El formato del correo electrónico no es correcto";
+        return false;
+    }
+    //fecha
+
+    //Éxito
+    else{
+      document.getElementById("MensajeExito").innerHTML = `Estimado(a) ${nombres} ${apellidos}, su hora para la especialidad ${especialidad} ha sido reservada para el
+      día ${fecha} a las ${hora}.<br /> Además, se le envió un mensaje a su correo ${email} con el detalle de su cita. <br /><br />
+      Gracias por preferirnos.`
+      
+      return false;
+    }
+};

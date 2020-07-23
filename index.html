@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="assets/style.css" />
   </head>
   <body>
-    <form id="Formulario" onsubmit="return validarFormulario();">
+    <form id="Formulario" onsubmit="return validarFormulario();" >
+        <h1>Reserva de horas</h1>
       <label for="rut">Rut *</label>
-      <input id="Rut" name="rut" type="text" placeholder="12.345.678-9" autofocus autocapitalize=""/>
+      <input id="Rut" name="rut" type="text" placeholder="12.345.678-9" autofocus/>
         <p class="mensaje_error" id="RutMensaje"></p>
 
       <label for="nombres">Nombres *</label>
-      <input id="Nombres" name="nombres" type="text" placeholder="Nombres"/>
+      <input id="Nombres" name="nombres" type="text" placeholder="Nombres" />
         <p class="mensaje_error" id="NombresMensaje"></p>
 
       <label for="apellidos">Apellidos *</label>
@@ -44,8 +45,10 @@
       <input id="Hora" name="hora" type="time" min="08:00" max="22:00" />
       <p class="mensaje_error" id="HoraMensaje"></p>
 
-      <input type="submit" value="Reservar" id="Boton">
+      <input type="submit" value="Reservar" id="Boton" >
     </form>
+
+    <p id="MensajeExito"></p>
 
 
     <script src="assets/script.js"></script>

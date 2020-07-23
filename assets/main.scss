@@ -18,11 +18,26 @@ body{
     left: 50%;
     transform: translateX(-50%);
     padding: 20px 10px;
+    h1{
+        font-size: 28px;
+        text-align: center;
+    }
     .mensaje_error{
         font-size: 12px;
         color: #a11;
-        font-weight: 800;
+        font-weight: 500;
         padding: 0 5px;
+    }
+    #Boton{
+        background-color: brown;
+        color: white;
+        border: none;
+        font-size: 20px;
+        padding: 15px;
+        &:hover{
+            background-color: darkred;
+            cursor: pointer;
+        }
     }
     input, select{
         border-radius: 5px;
@@ -43,4 +58,9 @@ body{
         }
         
     }
+}
+
+#MensajeExito{
+    padding-top: 40px;
+    text-align: center;
 }
