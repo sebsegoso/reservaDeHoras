@@ -31,14 +31,14 @@ function validarFormulario() {
 
     //Todos los campos están rellenados
     if (
-        rut === "" /*||
+        rut === "" ||
             nombres === "" ||
             apellidos === "" ||
             edad === "" ||
             email === "" ||
             especialidad === "" ||
             fecha === "" ||
-            hora === ""*/
+            hora === ""
     ) {
         alert(
             "Para hacer efectiva la reserva de tu hora debes completar todos los campos solicitados");
