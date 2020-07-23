@@ -8,8 +8,8 @@ function validarFormulario() {
     let email = document.getElementById("Email").value;
     let especialidad = document.getElementById("Especialidad").value;
     let fecha = document.getElementById("Fecha").value;
-    let fechaArray = fecha.split("-"); /*Convirtiendo string a array */ 
-    let fechaArrayReverse = fechaArray.reverse(); /*Invirtiendo array */ 
+    let fechaArray = fecha.split("-"); /*Convirtiendo string a array */
+    let fechaArrayReverse = fechaArray.reverse(); /*Invirtiendo array */
     let fechaDMA = fechaArrayReverse.join("-"); /*convirtiendo array a string nuevamente, con el formato DD-MM-AAAA */
     let hora = document.getElementById("Hora").value;
 
@@ -31,58 +31,58 @@ function validarFormulario() {
 
     //Todos los campos están rellenados
     if (
-        rut === "" ||
+        rut === "" /*||
             nombres === "" ||
             apellidos === "" ||
             edad === "" ||
             email === "" ||
             especialidad === "" ||
             fecha === "" ||
-            hora === ""
+            hora === ""*/
     ) {
         alert(
-            "Para hacer efectiva la reserva de tu hora debes completar todos los campos solicitados"
-        );
+            "Para hacer efectiva la reserva de tu hora debes completar todos los campos solicitados");
         return false;
-    } 
+    }
     //Rut con formato correcto
     else if (!validarRut) {
-        document.getElementById("RutMensaje").innerHTML =  "El formato del rut no es correcto, debe incluir puntos y guión";
+        errorValidacionMensaje("RutMensaje", "El formato del rut no es correcto, debe incluir puntos y guión");
         return false;
     }
     //Nombres con formato correcto
     else if (!validarNombres) {
-        document.getElementById("NombresMensaje").innerHTML =  "Los nombres sólo deben llevar letras";
+        errorValidacionMensaje("NombresMensaje", "Los nombres sólo deben llevar letras");
         return false;
     }
     //Apellidos 
     else if (!validarApellidos) {
-        document.getElementById("ApellidosMensaje").innerHTML =  "Los apellidos sólo deben llevar letras";
+        errorValidacionMensaje("ApellidosMensaje" , "Los apellidos sólo deben llevar letras");
         return false;
     }
     //Edad
     else if (!validarEdad) {
-        document.getElementById("EdadMensaje").innerHTML =  "La edad ingresada no es válida, sólo números";
+        errorValidacionMensaje("EdadMensaje" , "La edad ingresada no es válida, sólo números");
         return false;
     }
     //email
     else if (!validarEmail) {
-        document.getElementById("EmailMensaje").innerHTML =  "El formato del correo electrónico no es correcto";
+        errorValidacionMensaje("EmailMensaje" , "El formato del correo electrónico no es correcto");
         return false;
     }
     //fecha
     else if (!validarFecha) {
-        document.getElementById("FechaMensaje").innerHTML =  "Con que eres todo un hacker? Esta fecha no es correcta";
+        errorValidacionMensaje("FechaMensaje" , "Con que eres todo un hacker? Esta fecha no es correcta");
         return false;
     }
-   
-
     //Éxito
-    else{
-      document.getElementById("MensajeExito").innerHTML = `Estimado(a) ${nombres} ${apellidos}, su hora para la especialidad ${especialidad} ha sido reservada para el
-      día ${fechaDMA} a las ${hora}.<br /> Además, se le envió un mensaje a su correo ${email} con el detalle de su cita. <br /><br />
-      Gracias por preferirnos.`
-      
-      return false;
+    else {
+        errorValidacionMensaje("MensajeExito" , `Estimado(a) ${nombres} ${apellidos}, su hora para la especialidad ${especialidad} ha sido reservada para el
+        día ${fechaDMA} a las ${hora}.<br /> Además, se le envió un mensaje a su correo ${email} con el detalle de su cita. <br /><br />
+        Gracias por preferirnos.`)
+        return false;
     }
 };
+
+function errorValidacionMensaje(id, mensaje) {
+    document.getElementById(id).innerHTML = mensaje;
+}
