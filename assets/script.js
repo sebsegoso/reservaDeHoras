@@ -8,21 +8,27 @@ function validarFormulario() {
     let email = document.getElementById("Email").value;
     let especialidad = document.getElementById("Especialidad").value;
     let fecha = document.getElementById("Fecha").value;
+    let fechaArray = fecha.split("-"); /*Convirtiendo string a array */ 
+    let fechaArrayReverse = fechaArray.reverse(); /*Invirtiendo array */ 
+    let fechaDMA = fechaArrayReverse.join("-"); /*convirtiendo array a string nuevamente, con el formato DD-MM-AAAA */
     let hora = document.getElementById("Hora").value;
+
     //Espresiones regulares
     const rutChilenoRegExp = /^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}$/gim;
     const soloLetrasRegExp = /^[A-Za-z\ ÁÉÍÓÚáéíóúÑñ'-\s]*$/;
     const emailRegExp = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     const edadRegExp = /^[0-9]{1,3}$/;
+    const fechaRegExp = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+
     //validaciones de expresiones regulares
     const validarRut = rutChilenoRegExp.test(rut);
     const validarNombres = soloLetrasRegExp.test(nombres);
     const validarApellidos = soloLetrasRegExp.test(apellidos);
     const validarEdad = edadRegExp.test(edad);
     const validarEmail = emailRegExp.test(email);
+    const validarFecha = fechaRegExp.test(fechaDMA);
 
-    console.log(fecha);
-    console.log(hora);
+
     //Todos los campos están rellenados
     if (
         rut === "" ||
@@ -65,11 +71,16 @@ function validarFormulario() {
         return false;
     }
     //fecha
+    else if (!validarFecha) {
+        document.getElementById("FechaMensaje").innerHTML =  "Con que eres todo un hacker? Esta fecha no es correcta";
+        return false;
+    }
+   
 
     //Éxito
     else{
       document.getElementById("MensajeExito").innerHTML = `Estimado(a) ${nombres} ${apellidos}, su hora para la especialidad ${especialidad} ha sido reservada para el
-      día ${fecha} a las ${hora}.<br /> Además, se le envió un mensaje a su correo ${email} con el detalle de su cita. <br /><br />
+      día ${fechaDMA} a las ${hora}.<br /> Además, se le envió un mensaje a su correo ${email} con el detalle de su cita. <br /><br />
       Gracias por preferirnos.`
       
       return false;
