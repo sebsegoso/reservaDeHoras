@@ -1,4 +1,3 @@
-
 function validarFormulario() {
     //Extrayendo valores desde el HTML
     let rut = document.getElementById("Rut").value;
@@ -7,11 +6,12 @@ function validarFormulario() {
     let edad = document.getElementById("Edad").value;
     let email = document.getElementById("Email").value;
     let especialidad = document.getElementById("Especialidad").value;
+    let hora = document.getElementById("Hora").value;
+        //Fecha
     let fecha = document.getElementById("Fecha").value;
     let fechaArray = fecha.split("-"); /*Convirtiendo string a array */
     let fechaArrayReverse = fechaArray.reverse(); /*Invirtiendo array */
     let fechaDMA = fechaArrayReverse.join("-"); /*convirtiendo array a string nuevamente, con el formato DD-MM-AAAA */
-    let hora = document.getElementById("Hora").value;
 
     //Espresiones regulares
     const rutChilenoRegExp = /^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}$/gim;
@@ -20,14 +20,13 @@ function validarFormulario() {
     const edadRegExp = /^[0-9]{1,3}$/;
     const fechaRegExp = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
 
-    //validaciones de expresiones regulares
-    const validarRut = rutChilenoRegExp.test(rut);
-    const validarNombres = soloLetrasRegExp.test(nombres);
-    const validarApellidos = soloLetrasRegExp.test(apellidos);
-    const validarEdad = edadRegExp.test(edad);
-    const validarEmail = emailRegExp.test(email);
-    const validarFecha = fechaRegExp.test(fechaDMA);
-
+    //validaciones de expresiones regulares usando función validacionRegExp()
+    const validarRut = validacionRegExp(rutChilenoRegExp, rut);
+    const validarNombres = validacionRegExp(soloLetrasRegExp, nombres);
+    const validarApellidos = validacionRegExp(soloLetrasRegExp, apellidos);
+    const validarEdad = validacionRegExp(edadRegExp, edad);
+    const validarEmail = validacionRegExp(emailRegExp, email);
+    const validarFecha = validacionRegExp(fechaRegExp, fechaDMA);
 
     //Todos los campos están rellenados
     if (
@@ -56,32 +55,37 @@ function validarFormulario() {
     }
     //Apellidos 
     else if (!validarApellidos) {
-        errorValidacionMensaje("ApellidosMensaje" , "Los apellidos sólo deben llevar letras");
+        errorValidacionMensaje("ApellidosMensaje", "Los apellidos sólo deben llevar letras");
         return false;
     }
     //Edad
     else if (!validarEdad) {
-        errorValidacionMensaje("EdadMensaje" , "La edad ingresada no es válida, sólo números");
+        errorValidacionMensaje("EdadMensaje", "La edad ingresada no es válida, sólo números");
         return false;
     }
     //email
     else if (!validarEmail) {
-        errorValidacionMensaje("EmailMensaje" , "El formato del correo electrónico no es correcto");
+        errorValidacionMensaje("EmailMensaje", "El formato del correo electrónico no es correcto");
         return false;
     }
     //fecha
     else if (!validarFecha) {
-        errorValidacionMensaje("FechaMensaje" , "Con que eres todo un hacker? Esta fecha no es correcta");
+        errorValidacionMensaje("FechaMensaje", "Esta fecha no es correcta");
         return false;
     }
     //Éxito
     else {
-        errorValidacionMensaje("MensajeExito" , `Estimado(a) ${nombres} ${apellidos}, su hora para la especialidad ${especialidad} ha sido reservada para el
+        errorValidacionMensaje("MensajeExito", `Estimado(a) ${nombres} ${apellidos}, su hora para la especialidad ${especialidad} ha sido reservada para el
         día ${fechaDMA} a las ${hora}.<br /> Además, se le envió un mensaje a su correo ${email} con el detalle de su cita. <br /><br />
         Gracias por preferirnos.`)
         return false;
     }
 };
+
+
+function validacionRegExp(Regexp, textoAValidar) {
+    return (Regexp.test(textoAValidar));
+}
 
 function errorValidacionMensaje(id, mensaje) {
     document.getElementById(id).innerHTML = mensaje;
