@@ -82,7 +82,6 @@ function validarFormulario() {
     }
 };
 
-
 function validacionRegExp(Regexp, textoAValidar) {
     return (Regexp.test(textoAValidar));
 }
