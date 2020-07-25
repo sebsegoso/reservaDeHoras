@@ -7,7 +7,7 @@ function validarFormulario() {
     let email = document.getElementById("Email").value;
     let especialidad = document.getElementById("Especialidad").value;
     let hora = document.getElementById("Hora").value;
-        //Fecha
+    //Fecha
     let fecha = document.getElementById("Fecha").value;
     let fechaArray = fecha.split("-"); /*Convirtiendo string a array */
     let fechaArrayReverse = fechaArray.reverse(); /*Invirtiendo array */
@@ -30,14 +30,14 @@ function validarFormulario() {
 
     //Todos los campos están rellenados
     if (
-        rut === "" /*||
-            nombres === "" ||
-            apellidos === "" ||
-            edad === "" ||
-            email === "" ||
-            especialidad === "" ||
-            fecha === "" ||
-            hora === ""*/
+        rut === "" ||
+        nombres === "" ||
+        apellidos === "" ||
+        edad === "" ||
+        email === "" ||
+        especialidad === "" ||
+        fecha === "" ||
+        hora === ""
     ) {
         alert(
             "Para hacer efectiva la reserva de tu hora debes completar todos los campos solicitados");
@@ -50,42 +50,58 @@ function validarFormulario() {
     }
     //Nombres con formato correcto
     else if (!validarNombres) {
+        borrarMensajesDeError();
         errorValidacionMensaje("NombresMensaje", "Los nombres sólo deben llevar letras");
         return false;
     }
     //Apellidos 
     else if (!validarApellidos) {
+        borrarMensajesDeError();
         errorValidacionMensaje("ApellidosMensaje", "Los apellidos sólo deben llevar letras");
         return false;
     }
     //Edad
     else if (!validarEdad) {
+        borrarMensajesDeError();
         errorValidacionMensaje("EdadMensaje", "La edad ingresada no es válida, sólo números");
         return false;
     }
     //email
     else if (!validarEmail) {
+        borrarMensajesDeError();
         errorValidacionMensaje("EmailMensaje", "El formato del correo electrónico no es correcto");
         return false;
     }
     //fecha
     else if (!validarFecha) {
+        borrarMensajesDeError();
         errorValidacionMensaje("FechaMensaje", "Esta fecha no es correcta");
         return false;
     }
     //Éxito
     else {
+        borrarMensajesDeError();
         errorValidacionMensaje("MensajeExito", `Estimado(a) ${nombres} ${apellidos}, su hora para la especialidad ${especialidad} ha sido reservada para el
         día ${fechaDMA} a las ${hora}.<br /> Además, se le envió un mensaje a su correo ${email} con el detalle de su cita. <br /><br />
-        Gracias por preferirnos.`)
+        Gracias por preferirnos.`);
+
         return false;
     }
 };
 
-
 function validacionRegExp(Regexp, textoAValidar) {
     return (Regexp.test(textoAValidar));
 }
+
+function borrarMensajesDeError(){
+    errorValidacionMensaje("RutMensaje", "");
+    errorValidacionMensaje("NombresMensaje", "");
+    errorValidacionMensaje("ApellidosMensaje", "");
+    errorValidacionMensaje("EdadMensaje", "");
+    errorValidacionMensaje("EmailMensaje", "");
+    errorValidacionMensaje("FechaMensaje", "");
+}
+
 
 function errorValidacionMensaje(id, mensaje) {
     document.getElementById(id).innerHTML = mensaje;
